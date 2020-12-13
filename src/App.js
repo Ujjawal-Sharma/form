@@ -6,26 +6,26 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            fullName: '',
-            username: '',
+            firstName: '',
+            lastName: '',
             email: '',
-            password: ''
+            phone: ''
         }
-        this.changeFullName = this.changeFullName.bind(this)
-        this.changeUsername = this.changeUsername.bind(this)
+        this.changeFirstName = this.changeFirstName.bind(this)
+        this.changeLastName = this.changeLastName.bind(this)
         this.changeEmail = this.changeEmail.bind(this)
-        this.changePassword = this.changePassword.bind(this)
+        this.changePhone = this.changePhone.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    changeFullName(event) {
+    changeFirstName(event) {
         this.setState({
-            fullName:event.target.value
+            firstName:event.target.value
         })
     }
-    changeUsername(event) {
+    changeLastName(event) {
         this.setState({
-            username:event.target.value
+            lastName:event.target.value
         })
     }
     changeEmail(event) {
@@ -33,9 +33,9 @@ class App extends Component {
             email:event.target.value
         })
     }
-    changePassword(event) {
+    changePhone(event) {
         this.setState({
-            password:event.target.value
+            phone:event.target.value
         })
     }
 
@@ -43,40 +43,39 @@ class App extends Component {
         event.preventDefault()
 
         const registered = {
-            fullName: this.state.fullName,
-            username: this.state.username,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
             email: this.state.email,
-            password: this.state.password
+            phone: this.state.phone
         }
-        axios.post('http://localhost:4000/app/signup', registered)
+        axios.post('http://localhost:5000/app/signup', registered)
             .then(response => console.log(response.data))
 
             this.setState({
-                fullName: '',
-                username: '',
+                firstName: '',
+                lastName: '',
                 email: '',
-                password: ''
+                phone: ''
             })
     }
 
     render() {
        return (
-            <div>
-                <div className='container card  w-50 mt-5 shadow p-2 align-self-center card'>
+                <div className='container card  w-50 mt-5 shadow p-2 align-self-center bg-dark'>
                 <h2 className='align-self-center text-danger'>Register</h2>
                     <div className='form-div card-body'>
                         <form onSubmit={this.onSubmit}>
                             <input type='text'
-                             placeholder='Full Name'
-                             onChange={this.changeFullName}
-                             value={this.state.fullName}
+                             placeholder='First Name'
+                             onChange={this.changeFirstName}
+                             value={this.state.firstName}
                              className='form-control form-group'
                              />
 
                              <input type='text' 
-                             placeholder='Username'
-                             onChange={this.changeUsername}
-                             value={this.state.username}
+                             placeholder='Last Name'
+                             onChange={this.changeLastName}
+                             value={this.state.lastName}
                              className='form-control form-group' 
                              />
 
@@ -87,10 +86,10 @@ class App extends Component {
                              className='form-control form-group' 
                              />
 
-                             <input type='password' 
-                             placeholder='Password'
-                             onChange={this.changePassword}
-                             value={this.state.password}
+                             <input type='phone' 
+                             placeholder='Phone'
+                             onChange={this.changePhone}
+                             value={this.state.phone}
                              className='form-control form-group' 
                              />
 
@@ -101,7 +100,7 @@ class App extends Component {
                         </form>
                     </div>
                 </div>
-            </div>
+            
        );
     }
 }
